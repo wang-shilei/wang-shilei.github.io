@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>(｡・`ω´･)</title>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/config.js"></script>
+</head>
+</head>
+ 
+<body>
+    <div class = "title">
+        <h1>简单的随便写写</h1>
+        <h2>Rock的随手记</h2>
+    </div>
+    <div class="module" module-name="article-titles">
+        <div class="article-titles"></div>
+    </div>
+    
+    
+    <script type="text/javascript">
+       $(function(){
+            useWebConfig(function(){
+                var url = "/conf/article.json";
+                $.ajax(
+                    {
+                        url:url,
+                        data:null,
+                        cache:false,
+                        success:function(data){
+                            var articleTitles = $(".article-titles").append($("<ul>"));
+                            var prefix = "//" + $.webConfig.domain + "/";
+                            console.log(data)
+                            data.forEach(function(element) {
+                                var title = element.title;
+                                var path = element.path;
+                                var link = $("<a>");
+                                var li = $("<li>").append(link);
+                                link.attr("href",prefix+path);
+                                link.html(title);
+                                articleTitles.append(li);
+                            });
+                        }
+                    }
+
+                );
+            });
+       })
+
+
+    </script>
+</body>
+ 
+</html>
